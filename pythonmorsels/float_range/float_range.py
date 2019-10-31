@@ -15,3 +15,9 @@ class float_range:
 
     def __len__(self):
         return max(ceil((self.stop - self.start) / self.step), 0)
+
+    def __reversed__(self):
+        current = self.start + self.step * (len(self) - 1)
+        for _ in range(len(self)):
+            yield current
+            current -= self.step
