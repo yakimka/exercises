@@ -102,7 +102,7 @@ class FloatRangeTests(unittest.TestCase):
         big_num = 1000000
         self.assertEqual(next(reversed(float_range(big_num))), big_num-1)
 
-    @unittest.expectedFailure
+    # @unittest.expectedFailure
     def test_equality(self):
         self.assertEqual(float_range(0, 5, 0.5), float_range(0, 5, 0.5))
         self.assertEqual(float_range(5, 5), float_range(10, 10))
@@ -119,6 +119,9 @@ class FloatRangeTests(unittest.TestCase):
             def __eq__(self, other):
                 return True
         self.assertEqual(float_range(1000000), EqualToEverything())
+
+        # solution from pythonmorsels has a bug, so i add this extra check
+        self.assertNotEqual(float_range(1, 12, 1), float_range(1, 12, 2))
 
 
 if __name__ == "__main__":
