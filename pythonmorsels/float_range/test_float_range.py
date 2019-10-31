@@ -82,7 +82,7 @@ class FloatRangeTests(unittest.TestCase):
         self.assertNotEqual(type(response), list)
         self.assertNotEqual(type(response), tuple)
 
-    @unittest.expectedFailure
+    # @unittest.expectedFailure
     def test_has_length(self):
         self.assertEqual(len(float_range(100)), 100)
         self.assertEqual(len(float_range(1, 100)), 99)

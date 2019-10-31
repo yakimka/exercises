@@ -1,4 +1,4 @@
-import operator
+from math import ceil
 
 
 class float_range:
@@ -7,10 +7,11 @@ class float_range:
             start, stop = 0.0, start
         self.start, self.stop, self.step = start, stop, step
 
-        self.current = self.start
-        self.operator = operator.lt if self.step > 0 else operator.gt
-
     def __iter__(self):
-        while self.operator(self.current, self.stop):
-            yield self.current
-            self.current += self.step
+        current = self.start
+        for _ in range(len(self)):
+            yield current
+            current += self.step
+
+    def __len__(self):
+        return max(ceil((self.stop - self.start) / self.step), 0)
