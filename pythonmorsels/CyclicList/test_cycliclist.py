@@ -46,7 +46,7 @@ class CyclicListTests(unittest.TestCase):
         self.assertEqual(numbers.pop(0), 1)
 
     # To test the Bonus part of this exercise, comment out the following line
-    @unittest.expectedFailure
+    # @unittest.expectedFailure
     def test_supports_indexing(self):
         numbers = CyclicList([1, 2, 3, 4])
         self.assertEqual(numbers[2], 3)
