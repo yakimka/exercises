@@ -1,9 +1,16 @@
-def window(numbers, n):
+from collections import deque
+
+
+def window(numbers, n, *, fillvalue=None):
     if n == 0:
         return []
 
-    numbers = list(numbers)
-    args = [numbers[i:] for i in range(n)]
+    prev = deque(maxlen=n)
+    for num in numbers:
+        prev.append(num)
 
-    return list(zip(*args))
+        if len(prev) >= n:
+            yield tuple(prev)
 
+    if len(prev) < n:
+        yield tuple(list(prev) + [fillvalue for _ in range(n - len(prev))])
