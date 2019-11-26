@@ -1,16 +1,14 @@
 from collections import deque
+from itertools import islice, chain, repeat
 
 
 def window(numbers, n, *, fillvalue=None):
     if n == 0:
         return []
 
-    prev = deque(maxlen=n)
-    for num in numbers:
-        prev.append(num)
-
-        if len(prev) >= n:
-            yield tuple(prev)
-
-    if len(prev) < n:
-        yield tuple(list(prev) + [fillvalue for _ in range(n - len(prev))])
+    inumbers = iter(numbers)
+    window_ = deque(islice(chain(inumbers, repeat(fillvalue)), n), maxlen=n)
+    yield tuple(window_)
+    for num in inumbers:
+        window_.append(num)
+        yield tuple(window_)
